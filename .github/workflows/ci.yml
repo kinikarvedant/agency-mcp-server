@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Types and tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Every test runs against local fixture servers and fake API responses: no network needed.
+      - run: npm test
+      - run: npm run build
+
+  docker:
+    name: Docker image
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t agency-mcp-server .
+      - name: Boot the image and list the tools over Streamable HTTP
+        run: |
+          docker run -d --name mcp -p 3000:3000 -e DEMO_MODE=1 agency-mcp-server
+          for i in $(seq 1 30); do curl -fs localhost:3000/health && break; sleep 1; done
+          curl -fs -X POST localhost:3000/mcp \
+            -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | tee tools.json | grep -q answer_engine_visibility
+          curl -fs localhost:3000/ | grep -q "Audit a demo site through MCP"
+      - if: failure()
+        run: docker logs mcp

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <title>Test Dental | Family dentist in Testville</title>
+  <meta name="description" content="Test Dental is a family dental clinic in Testville with same-day emergency appointments, check-ups and children's dentistry.">
+  <link rel="canonical" href="/">
+  <meta property="og:title" content="Test Dental">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://site.test/og.png">
+  <meta property="og:url" content="https://site.test/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Dentist",
+        "@id": "https://site.test/#business",
+        "name": "Test Dental",
+        "url": "https://site.test/",
+        "telephone": "+61 3 5550 0000",
+        "image": "https://site.test/og.png",
+        "priceRange": "$$",
+        "geo": { "@type": "GeoCoordinates", "latitude": -37.8, "longitude": 144.9 },
+        "address": { "@type": "PostalAddress", "streetAddress": "1 Test St", "addressLocality": "Testville", "postalCode": "3000", "addressCountry": "AU" },
+        "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "08:00", "closes": "17:00" }]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How much does a check-up cost?", "acceptedAnswer": { "@type": "Answer", "text": "A check-up and clean costs $200." } },
+          { "@type": "Question", "name": "Do you see children?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, from age two." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://site.test/" },
+          { "@type": "ListItem", "position": 2, "name": "Services" }
+        ]
+      },
+      { "@type": "Service", "name": "Emergency dentistry", "provider": { "@id": "https://site.test/#business" }, "areaServed": "Testville", "description": "Same-day emergency care." }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav><a href="/">Home</a> <a href="/services">Services</a> <a href="/about">About</a></nav>
+  <main>
+    <h1>Test Dental, family dentist in Testville</h1>
+    <p>Test Dental is a family dentist in Testville offering check-ups, emergency care and children's dentistry six days a week.</p>
+    <img src="/team.jpg" alt="The Test Dental team">
+    <img src="/divider.svg" alt="">
+    <h2>How much does a check-up cost?</h2>
+    <p>A check-up and clean costs $200, including x-rays. Health fund rebates are processed on the spot.</p>
+    <h2>Do you see children?</h2>
+    <p>Yes, we see children from age two, and the first visit is free.</p>
+    <h2>Our services</h2>
+    <p>See <a href="/services">all services</a> or <a href="https://example.org/" rel="nofollow">the dental board</a>.</p>
+  </main>
+  <footer><a href="/about">About us</a></footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agency MCP Server playground</title>
+  <meta name="description" content="Run the Agency MCP Server's website audit tools against three fictional demo sites, over the Model Context Protocol.">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="wrap">
+    <p class="eyebrow">Agency MCP Server · playground</p>
+    <h1>Audit a demo site through MCP</h1>
+    <p class="lede">This page is a small MCP client. Each run sends a JSON-RPC <code>tools/call</code> over Streamable HTTP to the server,
+      which fetches and audits one of three fictional demo sites. Only those three sites are on the allowlist, so any other URL is refused.</p>
+    <p class="links"><a href="session.html">Recorded MCP session</a> · <a href="https://github.com/kinikarvedant/agency-mcp-server">Source and README</a> · <a href="/projects/agency-mcp-server/">Project page</a></p>
+  </header>
+
+  <main class="wrap">
+    <form id="form" class="card">
+      <div class="row">
+        <label>Client <select id="client"></select></label>
+        <label class="grow">Tool <select id="tool"></select></label>
+      </div>
+      <p id="desc" class="desc"></p>
+      <p id="mode" class="banner" hidden></p>
+      <label id="url-field">URL <input id="url" type="url" spellcheck="false"></label>
+      <div id="extra"></div>
+      <div class="row end">
+        <span class="muted">20 runs per visitor every 10 minutes.</span>
+        <button id="run" type="submit">Run tool</button>
+      </div>
+    </form>
+
+    <section id="out" aria-live="polite"></section>
+  </main>
+
+  <footer class="wrap muted">
+    <p>Read-only: the server only sends GET requests, refuses private and internal addresses after DNS lookup, and rate-limits every host.
+      Search Console and answer-engine results on this page are always fixture or mock data, and say so.</p>
+  </footer>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

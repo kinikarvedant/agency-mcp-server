@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recorded MCP session</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="wrap">
+    <p class="eyebrow"><a href="./">Agency MCP Server playground</a> · recorded session</p>
+    <h1>A recorded MCP session</h1>
+    <p id="intro" class="lede"></p>
+  </header>
+  <main class="wrap" id="log"></main>
+  <script type="module">
+    const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+    const t = await fetch("transcript.json").then((r) => r.json());
+    document.querySelector("#intro").innerHTML = `${esc(t.note)} Recorded ${esc(t.recordedAt)}. <a href="transcript.json">Raw JSON</a>.`;
+    const calls = new Map();
+    document.querySelector("#log").innerHTML = t.messages.map(({ from, ms, message: m }) => {
+      if (m.method) calls.set(m.id, m.method === "tools/call" ? m.params.name : m.method);
+      const label = m.method ? `${m.method}${m.params?.name ? ` · ${m.params.name}` : ""}` : `result of ${calls.get(m.id) ?? "?"}${m.result?.isError ? " (error)" : ""}`;
+      const open = from === "client" || m.result?.isError;
+      return `<div class="msg ${from}"><div class="who">${from === "client" ? "client → server" : "server → client"} · +${ms} ms</div>
+        <details${open ? " open" : ""}><summary>${esc(label)}</summary><pre>${esc(JSON.stringify(m, null, 2))}</pre></details></div>`;
+    }).join("");
+  </script>
+</body>
+</html>

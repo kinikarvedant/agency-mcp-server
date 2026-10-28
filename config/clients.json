@@ -1,0 +1,20 @@
+{
+  "dental": {
+    "name": "Bridge Road Dental Care",
+    "allow": ["https://vedantkinikar.duckdns.org/demos/dental"],
+    "brandTerms": ["Bridge Road Dental"],
+    "searchConsoleProperty": "https://vedantkinikar.duckdns.org/demos/dental/"
+  },
+  "cafe": {
+    "name": "Fitzroy Ember Coffee Roasters",
+    "allow": ["https://vedantkinikar.duckdns.org/demos/cafe"],
+    "brandTerms": ["Fitzroy Ember"],
+    "searchConsoleProperty": "https://vedantkinikar.duckdns.org/demos/cafe/"
+  },
+  "plumber": {
+    "name": "Merri Creek Plumbing & Gas",
+    "allow": ["https://vedantkinikar.duckdns.org/demos/plumber"],
+    "brandTerms": ["Merri Creek Plumbing"],
+    "searchConsoleProperty": "https://vedantkinikar.duckdns.org/demos/plumber/"
+  }
+}
